@@ -40,8 +40,7 @@ int main(int argc, char *argv[]) {
 
     printf("Generating sources...\n");
 
-    // add head and start of c code
-    fprintf(out_file, PROG_HEAD);
+    // add start of c code
     fprintf(out_file, PROG_START);
 
     char ch;
