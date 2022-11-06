@@ -17,10 +17,19 @@
 #include <main.h>
 #include <argsparser.h>
 
+#if defined(__APPLE__)
+    #include <malloc/malloc.h>
+#elif defined(__linux__)
+    #include <malloc.h>
+#endif
+
+// for result codes
+int result;
+
 int main(int argc, char *argv[]) {
     Args* args = (Args*) malloc(sizeof(Args));
     
-    int result = parse_args(args, argc, argv);
+    result = parse_args(args, argc, argv);
     if(result != 0) {
         printf("Arguments error!");
         return result;
@@ -80,7 +89,7 @@ int main(int argc, char *argv[]) {
     sprintf(cmd, "gcc -o %s output.c", args->output_path);
 
     // invoke compiler
-    int result = system(cmd);
+    result = system(cmd);
     if(result != 0) {
         printf("Compiling error!\n");
         return result;
